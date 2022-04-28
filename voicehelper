@@ -6,7 +6,6 @@ import datetime
 import webbrowser as wb
 import random
 import wikipedia
-from prepositions import prepositions
 from translate import Translator
 
 
@@ -15,11 +14,14 @@ comand = {
     'music': ('включи музыку', 'воспроизведи радио', 'включи радио', 'музыка'),
     'joke': ('расскажи анекдот', 'рассмеши меня', 'ты знаешь анекдоты', 'расскажи шутку'),
     'search': ('загугли', 'поиск', 'найди в интернете'),
-    'wiki': ('найди статью'),
+    'wiki': ('найди статью', 'википедия'),
     'translate': ('переведи', 'преведи фразу', 'переведи слова'),
-    'секундомер': ('таймер'),
+    'секундомер': ('секундомер'),
     'help': ('команды')
 }
+
+prepositions = 'без,безо,близ,в,во,вместо,для,вне,до,за,из,изо,из-за,из-под,к,ко,кроме,меду,меж,на,над,надо,о,об,обо,от,ото,пред,передо,пред,предо,по,под,подо,при,про,ради,с,со,сквозь,среди,у,через,чрез'.split(',')
+
 speak_engine = pyttsx3.init()
 r = sp.Recognizer()
 micro = sp.Microphone()
@@ -37,7 +39,7 @@ def recognition_voice(text):
         google()
 
     elif text in comand['wiki']:
-        wiki(text)
+        wiki()
 
     elif text in comand['секундомер']:
         time_clock()
@@ -105,14 +107,14 @@ def google():
     wb.open('http://www.google.com/search?q=' + query)
 
 
-def wiki(text):
+def wiki():
     say('скажите слово которое надо найти')
-    some_text = text.split()
+    some_text = voice().split()
     word = []
 
     for i in some_text:
         if i.lower() in prepositions:
-            word.append(i.lower())
+            word.append(i)
         else:
             word.append(i.capitalize())
 
