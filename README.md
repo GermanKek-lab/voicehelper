@@ -2,7 +2,7 @@
 
 перед использование надо установить библиотеки с помощью команд:
 
->pip install speech_recognition
+>pip install Speech Recognition
 >
 >pip install pyttsx3
 >
